@@ -10,7 +10,7 @@ f = open(os.path.join(sys.path[0],"data.json"))
 data = json.loads(f.read()) # data is a Python dictionary
 # .read() => pass the file contents (a string) to json.loads(), not the file object itself
 
-availableProds = open("available.csv","w",encoding="utf8", newline='') #file to save the available products
+availableProds = open("src/available.csv","w",encoding="utf8", newline='') #file to save the available products
 hasHeader =False
 for i in data ["Bundles"]:
     if (("Products" in i) and (i["Products"] )):
@@ -22,7 +22,7 @@ for i in data ["Bundles"]:
             prodName= productInfos['Name'][0:30]
             if (productInfos['IsAvailable']):
                 price= round(productInfos['Price'], 1)
-                if (os.stat("available.csv").st_size == 0 and not hasHeader) :
+                if (os.stat("src/available.csv").st_size == 0 and not hasHeader) :
                     writer = csv.DictWriter(availableProds, productInfos.keys())
                     writer.writeheader()
                     hasHeader =True
